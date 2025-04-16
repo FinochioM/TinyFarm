@@ -7,9 +7,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Player extends Entity {
     private static final float MOVEMENT_SPEED = 200.0f;
+    private Inventory inventory;
 
     public Player(Texture texture, float x, float y, float scale) {
         super(texture, x, y, scale);
+        inventory = new Inventory();
     }
 
     @Override
@@ -38,5 +40,15 @@ public class Player extends Entity {
 
         position.x = Math.max(0, Math.min(position.x, Gdx.graphics.getWidth() - getWidth()));
         position.y = Math.max(0, Math.min(position.y, Gdx.graphics.getHeight() - getHeight()));
+
+        inventory.update(this);
+    }
+
+    public void renderInventory(SpriteBatch batch) {
+        inventory.render(batch);
+    }
+
+    public Inventory getInventory() {
+        return inventory;
     }
 }

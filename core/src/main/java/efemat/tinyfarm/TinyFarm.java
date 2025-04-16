@@ -11,10 +11,14 @@ public class TinyFarm extends ApplicationAdapter {
     private SpriteBatch batch;
     private Texture playerTexture;
     private Player player;
+    private ItemDatabase itemDatabase;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
+
+        itemDatabase = ItemDatabase.getInstance();
+
         playerTexture = new Texture("player.png");
 
         float playerX = Gdx.graphics.getWidth() / 2f - (playerTexture.getWidth() / 2f);
@@ -33,6 +37,7 @@ public class TinyFarm extends ApplicationAdapter {
         batch.begin();
 
         player.render(batch);
+        player.renderInventory(batch);
 
         batch.end();
     }
@@ -41,5 +46,6 @@ public class TinyFarm extends ApplicationAdapter {
     public void dispose() {
         batch.dispose();
         playerTexture.dispose();
+        itemDatabase.dispose();
     }
 }
